@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "React componentWillReceiveProps implementation to make Controllable components",
   "scripts": {
-    "build": "rollup -c rollup.config.js -o index.cjs.js -f cjs && rollup -c rollup.config.js -o index.es.js -f es"
+    "build": "rollup -c rollup.config.js -o index.cjs.js -f cjs && rollup -c rollup.config.js -o index.es.js -f es",
+    "test": "jest --setupTestFrameworkScriptFile=raf/polyfill"
   },
   "main": "index.cjs.js",
   "module": "index.es.js",
@@ -24,6 +25,11 @@
   "devDependencies": {
     "babel-core": "~6.26.0",
     "babel-preset-env": "~1.6.1",
+    "babel-preset-react": "~6.24.1",
+    "jest": "~21.2.1",
+    "raf": "~3.4.0",
+    "react": "~16.2.0",
+    "react-dom": "~16.2.0",
     "rollup": "~0.52.0",
     "rollup-plugin-babel": "~3.0.1"
   }
