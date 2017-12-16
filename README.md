@@ -68,7 +68,7 @@ componentWillReceiveProps(nextProps) {
 }
 ```
 
-3. Custom setState declaration:
+4. Custom setState declaration:
 ```js
 componentWillReceiveProps(nextProps) { 
     makeControllable(this, nextProps, 'value', state => {
