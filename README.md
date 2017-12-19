@@ -33,7 +33,7 @@ npm i -S make-controllable
 # Usage
 Function parameters
 ```js
-import makeControllable from 'makeControllable';
+import makeControllable from 'make-controllable';
 
 makeControllable(componentInstance, nextProps, propsMapping, newStateCallback?);
 ```
