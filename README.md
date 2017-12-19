@@ -3,8 +3,9 @@ Implementing the exact same **componentWillReceiveProps** over and over again to
 
 **make-controllable** is a function to help make your components Controllable.
 
-[What is Controllable?](https://medium.com/@noamel)
+[What is Controllable?](https://codesandbox.io/s/o4mzmn992q)
 
+This repetitive code:
 ```js
 componentWillReceiveProps(nextProps) {
     const { value } = nextProps;
@@ -14,7 +15,7 @@ componentWillReceiveProps(nextProps) {
 }
 ```
 
-Can be shorten to this:
+Can be shorten to this one line:
 ```js
 componentWillReceiveProps(nextProps) { 
     makeControllable(this, nextProps, 'value');
@@ -44,21 +45,21 @@ makeControllable(componentInstance, nextProps, propsMapping, newStateCallback?);
 
 ## Examples
 
-1. Making `this.props.value` to `this.state.value` Controllable:
+#### Making `this.props.value`Controllable on `this.state.value`:
 ```js
 componentWillReceiveProps(nextProps) { 
     makeControllable(this, nextProps, 'value');
 }
 ```
 
-2. Making `this.props.value` to `this.state.otherValue` Controllable:
+#### Making `this.props.value` Controllable on `this.state.otherValue`:
 ```js
 componentWillReceiveProps(nextProps) { 
     makeControllable(this, nextProps, {'value': 'otherValue'});
 }
 ```
 
-3. On multiple props:
+#### On multiple props:
 ```js
 componentWillReceiveProps(nextProps) { 
     makeControllable(this, nextProps, {
@@ -68,7 +69,7 @@ componentWillReceiveProps(nextProps) {
 }
 ```
 
-4. Custom setState declaration:
+#### Custom `setState` declaration:
 ```js
 componentWillReceiveProps(nextProps) { 
     makeControllable(this, nextProps, 'value', state => {
