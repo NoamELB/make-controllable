@@ -1,6 +1,6 @@
 {
   "name": "make-controllable",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "React componentWillReceiveProps implementation to make Controllable components",
   "scripts": {
     "build": "rollup -c rollup.config.js -o index.cjs.js -f cjs && rollup -c rollup.config.js -o index.es.js -f es",

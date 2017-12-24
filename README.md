@@ -3,7 +3,7 @@ Implementing the exact same **componentWillReceiveProps** over and over again to
 
 **make-controllable** is a function to help make your components Controllable.
 
-[What is Controllable?](https://codesandbox.io/s/o4mzmn992q)
+**What is Controllable?** Read this: https://medium.com/myheritage-engineering/how-controllable-react-components-maximize-reusability-86e3d233fa8e
 
 This repetitive code:
 ```js
