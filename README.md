@@ -1,5 +1,5 @@
 # make-controllable
-Implementing the exact same **componentWillReceiveProps** over and over again to make Controllable components  can be very repetitive.
+Implementing the exact same **getDerivedStateFromProps** over and over again to make Controllable components can be very repetitive.
 
 **make-controllable** is a function to help make your components Controllable.
 
@@ -7,18 +7,22 @@ Implementing the exact same **componentWillReceiveProps** over and over again to
 
 This repetitive code:
 ```js
-componentWillReceiveProps(nextProps) {
-    const { value } = nextProps;
-    if (this.props.value !== value && this.state.value !== value) {
-        this.setState({ value });
+static getDerivedStateFromProps(props, state) {
+    let newState = null;
+    if (props.value !== state.prevValue) {
+        newState = { prevValue: props.value };
+        if (props.value !== state.value) {
+            newState.value = props.value;
+        }
     }
+    return newState;
 }
 ```
 
 Can be shorten to this one line:
 ```js
-componentWillReceiveProps(nextProps) { 
-    makeControllable(this, nextProps, 'value');
+static getDerivedStateFromProps(props, state) {
+    return makeControllable(props, state, 'value');
 }
 ```
 
@@ -27,7 +31,7 @@ Live example here: https://codesandbox.io/s/w0mjk9z63k
 
 # Install
 ```
-npm i -S make-controllable
+npm i make-controllable
 ```
 
 # Usage
@@ -35,52 +39,39 @@ Function parameters
 ```js
 import makeControllable from 'make-controllable';
 
-makeControllable(componentInstance, nextProps, propsMapping, newStateCallback?);
+return makeControllable(props, state, propsMapping);
 ```
 
 ## Parameters
-
-* **componentInstance** - React.Component, this instance of the component (your component `this`).
-* **nextProps** - Object, the next props (componentWillReceiveProps argument).
+* **props** - the 1st argument from `getDerivedStateFromProps`
+* **state** - the 2nd argument from `getDerivedStateFromProps`
 * **propsMapping** - Object | String, mapping of prop key name to state key name. Or a String for a single prop with the same state key.
-* **newStateCallback** - Function, optional, will use this function instead of `componentInstance.setState`.
 
 ## Examples
 
-#### Making `this.props.value`Controllable on `this.state.value`:
+#### Making `props.value` Controllable on `state.value`:
 ```js
-componentWillReceiveProps(nextProps) { 
-    makeControllable(this, nextProps, 'value');
+static getDerivedStateFromProps(props, state) {
+    return makeControllable(props, state, 'value');
 }
 ```
 
-#### Making `this.props.value` Controllable on `this.state.otherValue`:
+#### Making `props.value` Controllable on `state.otherValue`:
 ```js
-componentWillReceiveProps(nextProps) { 
-    makeControllable(this, nextProps, {'value': 'otherValue'});
+static getDerivedStateFromProps(props, state) {
+    return makeControllable(props, state, {'value': 'otherValue'});
 }
 ```
 
-#### On multiple props:
+#### With multiple props:
 ```js
-componentWillReceiveProps(nextProps) { 
-    makeControllable(this, nextProps, {
+static getDerivedStateFromProps(props, state) {
+    makeControllable(props, state, {
         'value': 'otherValue',
         'value2': 'otherValue2',
     });
 }
 ```
-
-#### Custom `setState` declaration:
-```js
-componentWillReceiveProps(nextProps) { 
-    makeControllable(this, nextProps, 'value', state => {
-        // mutate state here
-        this.setState(state);
-    });
-}
-```
-
 
 # License
 MIT
